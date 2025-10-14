@@ -56,4 +56,10 @@ tasks.withType(Test) {
             exceptionFormat "short"
         }
     }
+
+    task uiapi_test(type: Test) {
+        useJUnitPlatform {
+            includeTags("uiapi")
+        }
+    }
 }
