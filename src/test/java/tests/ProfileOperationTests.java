@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.Owner;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static data.TestData.*;
@@ -13,6 +14,7 @@ import static specs.BookStoreSpecs.addBookSpec;
 import static specs.BookStoreSpecs.deleteBookSpec;
 
 @Owner("sergeyglukhov")
+@Tag("uiapi")
 @DisplayName("UI+API тест на demoqa")
 public class ProfileOperationTests extends TestBase {
 
