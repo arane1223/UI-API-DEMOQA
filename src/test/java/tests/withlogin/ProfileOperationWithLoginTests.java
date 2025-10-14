@@ -48,7 +48,7 @@ public class ProfileOperationWithLoginTests extends TestBaseWithLogin {
                         .then()
                         .statusCode(204));
 
-        PROFILE_PAGE
+        profilePage
                 .openProfilePage(userId, expires, token)
                 .checkingProfileAfterDelete(AUTH_DATA.getUserName());
     }
@@ -73,7 +73,7 @@ public class ProfileOperationWithLoginTests extends TestBaseWithLogin {
                         .then()
                         .statusCode(201));
 
-        PROFILE_PAGE
+        profilePage
                 .openProfilePage(userId, expires, token)
                 .checkingProfileBeforeDelete(AUTH_DATA.getUserName(), GIT_BOOK_TITLE)
                 .deleteBooksInProfile()

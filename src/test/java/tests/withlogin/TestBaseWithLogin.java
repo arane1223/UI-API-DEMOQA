@@ -23,7 +23,7 @@ import static helpers.CustomAllureListener.withCustomTemplates;
 
 @ExtendWith(WithLoginExtension.class)
 public class TestBaseWithLogin {
-    protected final ProfilePage PROFILE_PAGE = new ProfilePage();
+    ProfilePage profilePage = new ProfilePage();
 
     @BeforeAll
     public static void setUp() {
