@@ -2,6 +2,10 @@ package helpers;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.extension.*;
+import org.openqa.selenium.Cookie;
+
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static data.TestData.AUTH_DATA;
@@ -27,6 +31,11 @@ public class WithLoginExtension implements BeforeTestExecutionCallback, AfterTes
             String expires = authResponse.path("expires");
 
             AuthContext.set(token, userId, expires);
+
+            open("/images/Toolsqa.jpg");
+            getWebDriver().manage().addCookie(new Cookie("userID", userId));
+            getWebDriver().manage().addCookie(new Cookie("expires", expires));
+            getWebDriver().manage().addCookie(new Cookie("token", token));
         }
     }
 

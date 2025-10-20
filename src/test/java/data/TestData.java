@@ -6,7 +6,10 @@ import models.LoginBodyModel;
 import java.util.List;
 
 public class TestData {
-    public static final LoginBodyModel AUTH_DATA = new LoginBodyModel("AlexTerrible", "Qwer!1234");
+    protected static String userName = System.getProperty("userName", "AlexTerrible");
+    protected static String password = System.getProperty("password", "Qwer!1234");
+
+    public static final LoginBodyModel AUTH_DATA = new LoginBodyModel(userName, password);
 
     public static final String
             GIT_BOOK_ISBN = "9781449325862",

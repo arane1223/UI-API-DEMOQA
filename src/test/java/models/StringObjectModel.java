@@ -7,4 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class StringObjectModel {
     String isbn, userId;
+
+    public static StringObjectModel deleteBook(String isbn, String userId) {
+        return new StringObjectModel(isbn, userId);
+    }
 }

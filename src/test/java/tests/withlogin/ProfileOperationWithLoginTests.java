@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 import static data.TestData.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
-import static specs.BookStoreSpecs.*;
+import static models.AddListOfBooksModel.addBook;
+import static models.StringObjectModel.deleteBook;
+import static specs.BookStoreSpecs.baseReqSpec;
+import static specs.BookStoreSpecs.baseRespSpec;
 
 @Owner("sergeyglukhov")
 @Tag("uiapi")
@@ -22,34 +24,30 @@ public class ProfileOperationWithLoginTests extends TestBaseWithLogin {
     @WithLogin
     @DisplayName("Успешное удаление товара из списка через API запрос c @WithLogin")
     void successfulApiDeleteBookFromListTest() {
-
         String
                 token = AuthContext.getToken(),
-                userId = AuthContext.getUserId(),
-                expires = AuthContext.getExpires();
+                userId = AuthContext.getUserId();
 
         step("Отправить запрос на добавление книги", () ->
-                given()
+                given(baseReqSpec)
                         .header("Authorization", "Bearer " + token)
-                        .body(addBookSpec(userId, BOOK_LIST))
-                        .contentType(JSON)
+                        .body(addBook(userId, BOOK_LIST))
                         .when()
                         .post("/BookStore/v1/Books")
                         .then()
-                        .statusCode(201));
+                        .spec(baseRespSpec(201)));
 
         step("Отправить запрос на удаление книги", () ->
-                given()
+                given(baseReqSpec)
                         .header("Authorization", "Bearer " + token)
-                        .body(deleteBookSpec(GIT_BOOK_ISBN, userId))
-                        .contentType(JSON)
+                        .body(deleteBook(GIT_BOOK_ISBN, userId))
                         .when()
                         .delete("/BookStore/v1/Book")
                         .then()
-                        .statusCode(204));
+                        .spec(baseRespSpec(204)));
 
         profilePage
-                .openProfilePage(userId, expires, token)
+                .openProfilePage()
                 .checkingProfileAfterDelete(AUTH_DATA.getUserName());
     }
 
@@ -57,24 +55,21 @@ public class ProfileOperationWithLoginTests extends TestBaseWithLogin {
     @WithLogin
     @DisplayName("Успешное удаление товара из списка через UI взаимодействие c @WithLogin")
     void successfulUiDeleteBookFromListTest() {
-
         String
                 token = AuthContext.getToken(),
-                userId = AuthContext.getUserId(),
-                expires = AuthContext.getExpires();
+                userId = AuthContext.getUserId();
 
         step("Добавляем книгу через API", () ->
-                given()
+                given(baseReqSpec)
                         .header("Authorization", "Bearer " + token)
-                        .body(addBookSpec(userId, BOOK_LIST))
-                        .contentType(JSON)
+                        .body(addBook(userId, BOOK_LIST))
                         .when()
                         .post("/BookStore/v1/Books")
                         .then()
-                        .statusCode(201));
+                        .spec(baseRespSpec(201)));
 
         profilePage
-                .openProfilePage(userId, expires, token)
+                .openProfilePage()
                 .checkingProfileBeforeDelete(AUTH_DATA.getUserName(), GIT_BOOK_TITLE)
                 .deleteBooksInProfile()
                 .checkingProfileAfterDelete(AUTH_DATA.getUserName());
