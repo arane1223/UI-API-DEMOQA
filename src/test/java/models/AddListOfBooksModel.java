@@ -11,8 +11,4 @@ public class AddListOfBooksModel {
     String userId;
 
     List<IsbnModel> collectionOfIsbns;
-
-    public static AddListOfBooksModel addBook(String userId, List<IsbnModel> isbn) {
-        return new AddListOfBooksModel(userId, isbn);
-    }
 }

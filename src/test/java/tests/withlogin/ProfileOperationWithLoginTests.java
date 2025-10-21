@@ -3,6 +3,8 @@ package tests.withlogin;
 import helpers.WithLogin;
 import helpers.AuthContext;
 import io.qameta.allure.Owner;
+import models.AddListOfBooksModel;
+import models.StringObjectModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -10,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import static data.TestData.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static models.AddListOfBooksModel.addBook;
-import static models.StringObjectModel.deleteBook;
 import static specs.BookStoreSpecs.baseReqSpec;
 import static specs.BookStoreSpecs.baseRespSpec;
 
@@ -31,7 +31,7 @@ public class ProfileOperationWithLoginTests extends TestBaseWithLogin {
         step("Отправить запрос на добавление книги", () ->
                 given(baseReqSpec)
                         .header("Authorization", "Bearer " + token)
-                        .body(addBook(userId, BOOK_LIST))
+                        .body(new AddListOfBooksModel(userId, BOOK_LIST))
                         .when()
                         .post("/BookStore/v1/Books")
                         .then()
@@ -40,7 +40,7 @@ public class ProfileOperationWithLoginTests extends TestBaseWithLogin {
         step("Отправить запрос на удаление книги", () ->
                 given(baseReqSpec)
                         .header("Authorization", "Bearer " + token)
-                        .body(deleteBook(GIT_BOOK_ISBN, userId))
+                        .body(new StringObjectModel(GIT_BOOK_ISBN, userId))
                         .when()
                         .delete("/BookStore/v1/Book")
                         .then()
@@ -62,7 +62,7 @@ public class ProfileOperationWithLoginTests extends TestBaseWithLogin {
         step("Добавляем книгу через API", () ->
                 given(baseReqSpec)
                         .header("Authorization", "Bearer " + token)
-                        .body(addBook(userId, BOOK_LIST))
+                        .body(new AddListOfBooksModel(userId, BOOK_LIST))
                         .when()
                         .post("/BookStore/v1/Books")
                         .then()
