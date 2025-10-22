@@ -15,7 +15,7 @@ import static specs.BookStoreSpecs.baseRespSpec;
 public class WithLoginExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
     @Override
-    @Step("Залогиниться в Book Store")
+    @Step("Авторизоваться в Book Store")
     public void beforeTestExecution(ExtensionContext context) {
         if (context.getTestMethod().isPresent() &&
                 context.getTestMethod().get().isAnnotationPresent(WithLogin.class)) {

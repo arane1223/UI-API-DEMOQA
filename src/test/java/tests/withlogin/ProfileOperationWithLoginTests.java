@@ -59,7 +59,7 @@ public class ProfileOperationWithLoginTests extends TestBaseWithLogin {
                 token = AuthContext.getToken(),
                 userId = AuthContext.getUserId();
 
-        step("Добавляем книгу через API", () ->
+        step("Отправить запрос на добавление книги через API", () ->
                 given(baseReqSpec)
                         .header("Authorization", "Bearer " + token)
                         .body(new AddListOfBooksModel(userId, BOOK_LIST))
