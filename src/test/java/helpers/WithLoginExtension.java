@@ -1,5 +1,6 @@
 package helpers;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.extension.*;
 import org.openqa.selenium.Cookie;
@@ -9,21 +10,23 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static data.TestData.AUTH_DATA;
+import static specs.BookStoreSpecs.baseReqSpec;
+import static specs.BookStoreSpecs.baseRespSpec;
 
 public class WithLoginExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
     @Override
+    @Step("Залогиниться в Book Store")
     public void beforeTestExecution(ExtensionContext context) {
         if (context.getTestMethod().isPresent() &&
                 context.getTestMethod().get().isAnnotationPresent(WithLogin.class)) {
 
-            Response authResponse = given()
+            Response authResponse = given(baseReqSpec)
                     .body(AUTH_DATA)
-                    .contentType(JSON)
                     .when()
                     .post("/Account/v1/Login")
                     .then()
-                    .statusCode(200)
+                    .spec(baseRespSpec(200))
                     .extract().response();
 
             String token = authResponse.path("token");
