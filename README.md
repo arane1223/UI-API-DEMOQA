@@ -2,15 +2,11 @@
 
 ## Ссылки к проекту
 
-- [Сборка в Jankins](https://jenkins.autotests.cloud/job/ui-api-demoqa/)
-- [Allure отчет](https://jenkins.autotests.cloud/job/ui-api-demoqa/allure/)
+- [Сборка в Jenkins](https://jenkins.autotests.cloud/job/ui-api-demoqa-develop/)
+- [Allure отчет](https://jenkins.autotests.cloud/job/ui-api-demoqa-develop/allure/)
 
 ## Запуск из терминала
 
-Локальный запуск:
-```
-gradle clean uiapi
-```
 Удаленный запуск:
 ```
 clean 
@@ -21,4 +17,6 @@ ${TASK}
 -DbrowserSize=${BROWSER_SIZE} 
 -DwebDriverHost=${WEB_DRIVER_HOST}
 -DremoteUrl=https://${AUTH}@${WEB_DRIVER_HOST}/wd/hub
+-DuserName=${USER_NAME}
+-Dpassword=${PASSWORD}
 ```

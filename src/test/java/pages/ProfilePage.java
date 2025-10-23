@@ -17,12 +17,17 @@ public class ProfilePage {
             deleteBook = $("#delete-record-undefined"),
             ok = $("#closeSmallModal-ok");
 
-    @Step("Открыть страницу с профилем")
-    public ProfilePage openProfilePage(String userId, String expires, String token) {
+    @Step("Авторизоваться через cookie")
+    public ProfilePage cookieAuth(String userId, String expires, String token) {
         open("/images/Toolsqa.jpg");
         getWebDriver().manage().addCookie(new Cookie("userID", userId));
         getWebDriver().manage().addCookie(new Cookie("expires", expires));
         getWebDriver().manage().addCookie(new Cookie("token", token));
+        return this;
+    }
+
+    @Step("Открыть страницу с профилем")
+    public ProfilePage openProfilePage() {
         open("/profile");
         return this;
     }

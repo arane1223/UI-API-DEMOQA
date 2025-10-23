@@ -1,21 +1,23 @@
-package tests;
+package tests.withlogin;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
+import helpers.WithLoginExtension;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.ProfilePage;
 
 import java.util.Map;
 
-
-public class TestBase {
+@ExtendWith(WithLoginExtension.class)
+public class TestBaseWithLogin {
     ProfilePage profilePage = new ProfilePage();
 
     @BeforeAll
@@ -26,12 +28,14 @@ public class TestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "128");
         Configuration.remote = System.getProperty("remoteUrl");
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+
+        DesiredCapabilities Capabilities = new DesiredCapabilities();
+        Capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
-        Configuration.browserCapabilities = capabilities;
+        Configuration.browserCapabilities = Capabilities;
+
         RestAssured.baseURI = System.getProperty("baseUrl", "https://demoqa.com");
     }
 
