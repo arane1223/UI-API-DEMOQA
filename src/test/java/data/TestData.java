@@ -6,8 +6,8 @@ import models.LoginBodyModel;
 import java.util.List;
 
 public class TestData {
-    protected static String userName = System.getProperty("userName", "AlexTerrible");
-    protected static String password = System.getProperty("password", "Qwer!1234");
+    protected static String userName = System.getProperty("userName");
+    protected static String password = System.getProperty("password");
 
     public static final LoginBodyModel AUTH_DATA = new LoginBodyModel(userName, password);
 
