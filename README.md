@@ -7,10 +7,6 @@
 
 ## Запуск из терминала
 
-Локальный запуск:
-```
-gradle clean uiapi
-```
 Удаленный запуск:
 ```
 clean 
@@ -21,4 +17,6 @@ ${TASK}
 -DbrowserSize=${BROWSER_SIZE} 
 -DwebDriverHost=${WEB_DRIVER_HOST}
 -DremoteUrl=https://${AUTH}@${WEB_DRIVER_HOST}/wd/hub
+-DuserName=${USER_NAME}
+-Dpassword=${PASSWORD}
 ```
