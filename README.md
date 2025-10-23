@@ -2,8 +2,8 @@
 
 ## Ссылки к проекту
 
-- [Сборка в Jankins](https://jenkins.autotests.cloud/job/ui-api-demoqa/)
-- [Allure отчет](https://jenkins.autotests.cloud/job/ui-api-demoqa/allure/)
+- [Сборка в Jenkins](https://jenkins.autotests.cloud/job/ui-api-demoqa-develop/)
+- [Allure отчет](https://jenkins.autotests.cloud/job/ui-api-demoqa-develop/allure/)
 
 ## Запуск из терминала
 
